@@ -1,7 +1,7 @@
 rmdir build\arch14cz /S /Q
 rmdir dist\arch14cz /S /Q
 
-call ..\venv\Scripts\activate.bat
+call venv\Scripts\activate.bat
 
 pip uninstall -y arch14cz_backend
 pip cache purge
