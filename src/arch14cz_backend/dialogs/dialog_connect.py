@@ -31,7 +31,7 @@ class DialogConnect(DConnectFrame):
 		logo_frame.layout().addWidget(
 			DClickableLogo(
 				path,
-				"https://github.com/demjanp/arch14cz_backend",
+				"https://github.com/ARUP-CAS/aiscr-arch14cz-backend",
 				alignment = QtCore.Qt.AlignCenter,
 			)
 		)

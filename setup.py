@@ -24,7 +24,7 @@ setup(
 	description="Backend interface for Arch14CZ - the database of archaeological radiocarbon dates of the Czech Republic",
 	long_description=long_description,
 	long_description_content_type="text/markdown",
-	url="https://github.com/demjanp/arch14cz_backend",
+	url="https://github.com/ARUP-CAS/aiscr-arch14cz-backend",
 	author="Peter Demján",
 	author_email="peter.demjan@gmail.com",
 	classifiers=[
