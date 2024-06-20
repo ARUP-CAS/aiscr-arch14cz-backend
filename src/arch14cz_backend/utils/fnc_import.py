@@ -242,6 +242,16 @@ def import_xlsx(cmodel, path, fields, progress):
 			return ""
 		return str(value).strip()
 	
+	def get_unique_lab_code(value, lab_codes):
+		
+		value_new = value
+		suffix = 0
+		while value_new in lab_codes:
+			suffix += 1
+			value_new = "%s_%s" % (value, str(suffix))
+		lab_codes.add(value_new)
+		return value_new
+	
 	errors = []
 	
 	c14_data = []
@@ -303,11 +313,15 @@ def import_xlsx(cmodel, path, fields, progress):
 		ws = wb[sheet]
 		break
 	max_row = 2
+	lab_codes = set()
 	for row in ws.iter_rows(min_row = 2):
 		c14_lab_code = get_from_field("Lab Code", fields, row)
 		if not c14_lab_code:
 			break
 		max_row += 1
+		lab_codes.add(c14_lab_code)
+	for obj in cls_lookup["C_14_Analysis"].get_members(direct_only = True):
+		lab_codes.add(obj.get_descriptor("Lab_Code"))
 	
 	n_rows = max_row - 2
 	unknown_sample_n = 1
@@ -404,6 +418,8 @@ def import_xlsx(cmodel, path, fields, progress):
 		
 		if (not c14_lab_code):
 			continue
+		
+		c14_lab_code = get_unique_lab_code(c14_lab_code, lab_codes)
 		
 		if c14_public:
 			try:

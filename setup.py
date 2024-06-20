@@ -40,7 +40,7 @@ setup(
 	packages=find_packages(where="src"),
 	python_requires=">=3.10, <4",
 	install_requires=[
-		'deposit_gui>=1.5.3, <2',
+		'deposit_gui>=1.5.4, <2',
 		'numpy>=1.24.1, <2',
 		'scipy>=1.10.0, <2',
 		'matplotlib>=3.7.0, <4',
