@@ -1,10 +1,19 @@
 from arch14cz_backend import (__version__)
 import codecs
+import sys
 import os
 
 ftemplate = "installer/arch14cz_installer.tpl"
 fout = "installer/arch14cz_installer.ifp"
 fdist = "dist/arch14cz"
+
+args = sys.argv[1:]
+if not len(args) == 1:
+	raise Exception("Invalid number of arguments. Enter Arch14CZ_backend root path.")
+
+root_path, = args
+
+root_path = os.path.normpath(root_path)
 
 extra_dirs = []
 
@@ -42,6 +51,7 @@ vars = dict(
 	version = __version__,
 	filename = "arch14cz_%s_setup.exe" % "_".join(__version__.split(".")),
 	files = filestext,
+	root_path = root_path,
 )
 
 text = text % vars
