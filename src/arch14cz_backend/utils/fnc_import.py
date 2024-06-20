@@ -313,13 +313,13 @@ def import_xlsx(cmodel, path, fields, progress):
 		ws = wb[sheet]
 		break
 	max_row = 2
-	lab_codes = set()
 	for row in ws.iter_rows(min_row = 2):
 		c14_lab_code = get_from_field("Lab Code", fields, row)
 		if not c14_lab_code:
 			break
 		max_row += 1
-		lab_codes.add(c14_lab_code)
+	
+	lab_codes = set()
 	for obj in cls_lookup["C_14_Analysis"].get_members(direct_only = True):
 		lab_codes.add(obj.get_descriptor("Lab_Code"))
 	

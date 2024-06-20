@@ -1,6 +1,7 @@
 from arch14cz_backend.utils.fnc_convert import (float_or_none)
 
 import numpy as np
+from datetime import datetime
 from scipy.interpolate import interp1d
 
 def load_calibration_curve(fcalib, interpolate = False):
@@ -121,8 +122,12 @@ def update_ranges(cmodel, path_curve, progress = None, cnt = 1, cmax = None):
 		uncert = float_or_none(obj.get_descriptor("C_14_Uncertainty_1Sig"))
 		if (age is None) or (uncert is None):
 			continue
-		dist = calibrate(age, uncert, curve[:,1], curve[:,2])
-		ce_to, ce_from = calc_range(curve[:,0], dist, 0.9545)
+		if age < curve[:,1].min():
+			ce_from = curve[:,0].min()
+			ce_to = 1950 - float(datetime.now().year)
+		else:
+			dist = calibrate(age, uncert, curve[:,1], curve[:,2])
+			ce_to, ce_from = calc_range(curve[:,0], dist, 0.9545)
 		ce_from, ce_to = int(round(-(ce_from - 1950))), int(round(-(ce_to - 1950)))
 		obj.set_descriptor("CE_From", ce_from)
 		obj.set_descriptor("CE_To", ce_to)
