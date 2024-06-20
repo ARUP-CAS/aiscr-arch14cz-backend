@@ -199,10 +199,13 @@ Arch14CZ - Backend requires Python 3 and a Windows environment. To prepare a Pyt
 2. Navigate to the Arch14CZ - Backend root directory: 
 <pre><code>cd [path to local Arch14CZ - Backend dir]</code></pre>
 3. Create the virtual environment:
-<pre><code>python -m venv [VE dir name e.g. 'venv']</code></pre>
-4. Activate the virtual environment:
-<pre><code>venv\Scripts\activate.bat</code></pre>
-5. To exit the virtual environment:
+<pre><code>python -m venv [VE dir name e.g. '.venv']</code></pre>
+4. Install and update required libraries:
+<pre><code>python -m pip install --upgrade pip
+python -m pip install --upgrade build</code></pre>
+5. Activate the virtual environment:
+<pre><code>.venv\Scripts\activate.bat</code></pre>
+6. To exit the virtual environment:
 <pre><code>deactivate</code></pre>
 
 ### Cloning the GitHub Project <a name="cloning"></a>
@@ -235,9 +238,8 @@ python start_arch14cz.py</code></pre>
 	UninstallIconPath</code></pre>
 3. Update virtual environment path in `installer\arch14cz.spec` in the part `pathex=['..\\venv\\Lib\\site-packages'],`.
 5. Activate the virtual environment.
-6. Execute the following commands once per virtual environment:
-<pre><code>python -m pip install --upgrade build
-pip install pyinstaller</code></pre>
+6. Execute the following command once per virtual environment:
+<pre><code>pip install pyinstaller==5.6.2</code></pre>
 6. Deactivate the virtual environment.
 7. Run `build.bat`.
 8. Run InstallForge and open the file `installer\arch14cz_installer.ifp`.

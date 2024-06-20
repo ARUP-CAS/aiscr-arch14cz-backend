@@ -302,11 +302,18 @@ def import_xlsx(cmodel, path, fields, progress):
 	for sheet in wb.sheetnames:
 		ws = wb[sheet]
 		break
-	n_rows = ws.max_row - 1
+	max_row = 2
+	for row in ws.iter_rows(min_row = 2):
+		c14_lab_code = get_from_field("Lab Code", fields, row)
+		if not c14_lab_code:
+			break
+		max_row += 1
+	
+	n_rows = max_row - 2
 	unknown_sample_n = 1
 	row_n = 1
-	progress.update_state(value = row_n, maximum = n_rows * 2)
-	for row in ws.iter_rows(min_row = 2):
+	progress.update_state(value = row_n, maximum = n_rows * 2 + 1)
+	for row in ws.iter_rows(min_row = 2, max_row = max_row):
 		
 		progress.update_state(value = row_n)
 		if progress.cancel_pressed():
@@ -543,7 +550,7 @@ def import_xlsx(cmodel, path, fields, progress):
 		key = (obj.get_descriptor("Description"), obj.get_descriptor("Reference"), obj.get_descriptor("URI"))
 		source_lookup[key] = obj
 	
-	progress.update_state(value = row_n, maximum = n_rows * 2 + len(sources))
+	progress.update_state(value = row_n, maximum = n_rows * 2 + 1 + len(sources))
 	for idx, data in enumerate(sources):
 		row_n += 1
 		progress.update_state(value = row_n)

@@ -20,7 +20,7 @@ long_description = (here / "README.md").read_text(encoding="utf-8")
 
 setup(
 	name="arch14cz_backend",
-	version="1.0.2",
+	version="1.0.3",
 	description="Backend interface for Arch14CZ - the database of archaeological radiocarbon dates of the Czech Republic",
 	long_description=long_description,
 	long_description_content_type="text/markdown",
@@ -40,8 +40,8 @@ setup(
 	packages=find_packages(where="src"),
 	python_requires=">=3.10, <4",
 	install_requires=[
-		'deposit_gui>=1.4.38, <1.5',
-		'numpy>=1.24.1',
+		'deposit_gui>=1.5.3, <2',
+		'numpy>=1.24.1, <2',
 		'scipy>=1.10.0, <2',
 		'matplotlib>=3.7.0, <4',
 	],
